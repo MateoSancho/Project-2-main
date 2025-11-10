@@ -1,0 +1,15 @@
+{
+    "brands": [
+        {
+            "id": "QWER",
+            "name": "Tren Tech"
+        }
+    ],
+    "athletes": [
+        {
+            "id": "ABCD",
+            "name": "Tren Twins",
+            "brandId" : "QWER"
+        }
+    ]
+}
