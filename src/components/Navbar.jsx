@@ -2,9 +2,11 @@ import myLogo from "../assets/Logo.png"
 
 function Navbar() {
     return (
-    <div>
-        <img src={myLogo} alt="Logo" className="nav-logo" />
-        <h1>Project 2</h1>
+    <div className="navbar">
+        <div className="nav-container">
+            <img src={myLogo} alt="Logo" className="nav-logo" />
+            <h1 className="nav-title">Project 2</h1>
+        </div>
     </div>
     );
   }
