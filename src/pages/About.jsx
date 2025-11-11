@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function About() {
   const teamMember = {
       name: "Mateo",
@@ -19,6 +21,7 @@ function About() {
         <h3>{teamMember.name}</h3>
         <p>{teamMember.description}</p>
         </div>
+        <Link to="/">← Back to Home</Link>
       </div>
     );
   }

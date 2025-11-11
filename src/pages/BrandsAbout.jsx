@@ -23,7 +23,7 @@ function BrandsAbout() {
 
   return (
     <div className="brandabout">
-      <Link to="/brands">← Back to Athletes</Link>
+      <Link to="/brands">← Back to Brands</Link>
       <h1>Brands About</h1>
       <div className="brandinfo">
         <p><strong>Name:</strong> {brand.name}</p>

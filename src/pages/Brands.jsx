@@ -1,5 +1,6 @@
 import BrandCard from "../components/BrandCard"; // used to render each Project
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 function Brands() {
@@ -22,6 +23,7 @@ function Brands() {
 
   return (
     <div>
+      <Link to="/">← Back to Home</Link>
       <h1>Brands</h1>
       {brands.map((eachBrand) => {
         //console.log(eachBrand)

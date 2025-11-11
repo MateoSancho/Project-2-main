@@ -1,5 +1,6 @@
 import AthleteCard from "../components/AthleteCard"; // used to render each Project
 import { useEffect , useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 function Athletes() {
@@ -22,9 +23,8 @@ function Athletes() {
 
   return (
     <div>
+      <Link to="/">← Back to Home</Link>
       <h1>Athletes</h1>
-
-      
 
       {athletes.map((eachAthlete) => {
         //console.log(eachAthlete)
