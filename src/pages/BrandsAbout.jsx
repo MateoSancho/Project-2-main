@@ -23,14 +23,17 @@ function BrandsAbout() {
 
   return (
     <div className="brandabout">
-      <Link to="/brands">← Back to Brands</Link>
+       <img src={`${import.meta.env.VITE_SERVER_URL}${brand.image}`} alt={brand.name} className="brand-detail-image"/>
       <h1>Brands About</h1>
       <div className="brandinfo">
         <p><strong>Name:</strong> {brand.name}</p>
         <p><strong>Location:</strong> {brand.location}</p>
         <p><strong>Year of creation:</strong> {brand.yearCreated}</p>
-        <p><strong>Brand ID:</strong> {brand.brandId}</p>
+        <p><strong>Brand ID:</strong> {brand.id}</p>
       </div>
+
+      <Link to="/brands" className="Link">← Back to Brands</Link>
+
     </div>
   );
 }

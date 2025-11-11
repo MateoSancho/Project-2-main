@@ -24,12 +24,14 @@ function AthletesAbout() {
 
   return (
     <div className="athleteabout">
-      <Link to="/athletes">← Back to Athletes</Link>
+      <img src={`${import.meta.env.VITE_SERVER_URL}${athlete.image}`} alt={athlete.name} className="athlete-detail-image"/>
       <h1>{athlete.name}</h1>
       <div className="athleteinfo">
         <p><strong>Category:</strong> {athlete.category}</p>
         <p><strong>Brand ID:</strong> {athlete.brandId}</p>
       </div>
+
+    <Link to="/athletes" className="Link">← Back to Athletes</Link>
     </div>
   );
 }

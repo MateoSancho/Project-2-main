@@ -23,13 +23,14 @@ function Athletes() {
 
   return (
     <div>
-      <Link to="/">← Back to Home</Link>
       <h1>Athletes</h1>
 
       {athletes.map((eachAthlete) => {
         //console.log(eachAthlete)
         return <AthleteCard key={eachAthlete.id} athlete={eachAthlete} />;
       })}
+      
+      <Link to="/" className="Link">← Back to Home</Link>
     </div>
   );
 }

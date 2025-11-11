@@ -21,7 +21,7 @@ function About() {
         <h3>{teamMember.name}</h3>
         <p>{teamMember.description}</p>
         </div>
-        <Link to="/">← Back to Home</Link>
+        <Link to="/" className="Link">← Back to Home</Link>
       </div>
     );
   }
