@@ -1,13 +1,36 @@
+import BrandCard from "../components/BrandCard"; // used to render each Project
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 function Brands() {
+  const [brands, setBrands] = useState(null);
 
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_SERVER_URL}/brands`)
+    .then((response) => {
+      //console.log(response.data)
+      setBrands(response.data);
+    })
+    .catch((error) => {
+      //console.log(error)
+    });
+  }, []);
 
-    return (
-      <div>
-        <h1>Brands</h1>
-      </div>
-    );
+  if (!brands) {
+    return <h3>Searching...</h3>;
   }
-  
+
+  return (
+    <div>
+      <h1>Brands</h1>
+      {brands.map((eachBrand) => {
+        //console.log(eachBrand)
+        return <BrandCard key={eachBrand.id} brand={eachBrand} />;
+      })}
+    </div>
+  );
+}
+
 export default Brands;
 
 //Search, Add, Delete, Edit
