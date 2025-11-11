@@ -6,4 +6,7 @@ function Athletes() {
     );
   }
   
-  export default Athletes;
+export default Athletes;
+
+//Search, Add, Delete, Edit
+//Extra: Pages

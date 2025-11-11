@@ -8,4 +8,6 @@ function BrandsAbout() {
     );
   }
   
-  export default BrandsAbout;
+export default BrandsAbout;
+
+  // Cancel, Edit, Back, Brand Link, Css
