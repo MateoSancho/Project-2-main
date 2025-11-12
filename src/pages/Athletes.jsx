@@ -1,7 +1,7 @@
-import AthleteCard from "../components/AthleteCard"; // used to render each Project
-import { useEffect , useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import AthleteCard from "../components/AthleteCard"
+import { useEffect , useState } from "react"
+import axios from "axios"
+import { Link } from "react-router-dom"
 
 function Athletes() {
   const [athletes, setAthletes] = useState(null);
@@ -25,11 +25,15 @@ function Athletes() {
     <div>
       <h1>Athletes</h1>
 
+      <div className="LinkAddAthlete">
+        <Link to="/athletes/add">Add New Athlete</Link>
+      </div>
+
       {athletes.map((eachAthlete) => {
         //console.log(eachAthlete)
         return <AthleteCard key={eachAthlete.id} athlete={eachAthlete} />;
       })}
-      
+
       <Link to="/" className="Link">← Back to Home</Link>
     </div>
   );

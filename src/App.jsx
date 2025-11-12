@@ -8,6 +8,7 @@ import Navbar from './components/Navbar.jsx'
 import About from './pages/About.jsx'
 import Athletes from './pages/Athletes.jsx'
 import AthletesAbout from "./pages/AthletesAbout.jsx"
+import AddAthlete from './pages/AddAthlete.jsx'
 import Brands from './pages/Brands.jsx'
 import BrandsAbout from './pages/BrandsAbout.jsx'
 import Notfound from './pages/Notfound.jsx'
@@ -25,6 +26,7 @@ function App() {
               <Route path="/" element={<Dashboard />}/>
               <Route path="/athletes" element={<Athletes />} />
               <Route path="/athletes/:id" element={<AthletesAbout />} />
+              <Route path="/athletes/add" element={<AddAthlete />} />
               <Route path="/brands" element={<Brands />} />
               <Route path="/brands/:id" element={<BrandsAbout />} />
               <Route path="/about" element={<About />} />
