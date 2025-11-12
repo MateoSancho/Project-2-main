@@ -24,6 +24,11 @@ function Brands() {
   return (
     <div>
       <h1>Brands</h1>
+
+      <div className="LinkAddBrand">
+        <Link to="/brands/add">Add New Brand</Link>
+      </div>
+
       {brands.map((eachBrand) => {
         //console.log(eachBrand)
         return <BrandCard key={eachBrand.id} brand={eachBrand} />;
@@ -37,5 +42,5 @@ function Brands() {
 
 export default Brands;
 
-//Search, Add, Delete, Edit
+//Search, Delete, Edit
 //Extra: pages

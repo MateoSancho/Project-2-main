@@ -41,5 +41,5 @@ function Athletes() {
 
 export default Athletes;
 
-//Search, Add, Delete, Edit
+//Search, Delete, Edit
 //Extra: Pages

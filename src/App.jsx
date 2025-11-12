@@ -11,6 +11,7 @@ import AthletesAbout from "./pages/AthletesAbout.jsx"
 import AddAthlete from './pages/AddAthlete.jsx'
 import Brands from './pages/Brands.jsx'
 import BrandsAbout from './pages/BrandsAbout.jsx'
+import AddBrand from './pages/AddBrand.jsx'
 import Notfound from './pages/Notfound.jsx'
 
 
@@ -29,6 +30,7 @@ function App() {
               <Route path="/athletes/add" element={<AddAthlete />} />
               <Route path="/brands" element={<Brands />} />
               <Route path="/brands/:id" element={<BrandsAbout />} />
+              <Route path="/brands/add" element={<AddBrand />} />
               <Route path="/about" element={<About />} />
               <Route path="*" element={<Notfound />} />
            </Routes>
