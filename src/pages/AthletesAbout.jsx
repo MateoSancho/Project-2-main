@@ -4,6 +4,7 @@ import axios from "axios";
 
 function AthletesAbout() {
   const [athlete, setAthlete] = useState(null);
+  const [brand, setBrand] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
@@ -22,6 +23,17 @@ function AthletesAbout() {
       setCategory(response.data.category);
       setBrandId(response.data.brandId);
       setImage(response.data.image);
+
+      // Cargar datos de la marca usando el brandId del atleta
+      if (response.data.brandId) {
+        axios.get(`${import.meta.env.VITE_SERVER_URL}/brands/${response.data.brandId}`)
+        .then((brandResponse) => {
+          setBrand(brandResponse.data);
+        })
+        .catch((error) => {
+          console.error("Error loading brand:", error);
+        });
+      }
     })
     .catch((error) => {
       //console.error(error)
@@ -101,6 +113,10 @@ function AthletesAbout() {
               <option value="AA">Ferral Supplements</option>
               <option value="AB">Gymshark</option>
               <option value="AC">Breath Divnity</option>
+              <option value="AD">Youngla</option>
+              <option value="AE">Vanquish</option>
+              <option value="AF">PR Lifestyle</option>
+              <option value="AG">Unknown</option>
             </select>
           </div>
 
@@ -132,7 +148,12 @@ function AthletesAbout() {
       <h1>{athlete.name}</h1>
       <div className="athleteinfo">
         <p><strong>Category:</strong> {athlete.category}</p>
-        <p><strong>Brand ID:</strong> {athlete.brandId}</p>
+        <p><strong>Brand:</strong>{" "} 
+          {brand ? (
+            <Link to={`/brands/${brand.id}`} className="brand-link">{brand.name}</Link>
+          ) : ( 
+            <span>Loading brand...</span> //Mensaje para mostrar mientras carga 
+        )} </p>
         <div className="action-buttons">
           <button onClick={() => setIsEditing(true)} className="edit-btn">Edit Athlete</button>
           <button onClick={deleteAthlete} className="delete-btn">Delete Athlete</button>
@@ -144,5 +165,3 @@ function AthletesAbout() {
 }
 
 export default AthletesAbout;
-
-//Brand Link
