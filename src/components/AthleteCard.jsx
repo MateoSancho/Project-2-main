@@ -18,9 +18,6 @@ function AthleteCard (props) {
           <Link to={`/athletes/${props.athlete.id}`}>
             <button className="view-details-btn">View Details</button>
           </Link>
-          <button className="delete-btn" onClick={handleDelete}>
-            Delete
-          </button>
         </div>
       </div>
     </div>

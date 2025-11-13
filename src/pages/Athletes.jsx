@@ -39,22 +39,6 @@ function Athletes() {
     }
   };
 
-  //Eliminar 
-  const handleDeleteAthlete = (athleteId) => {
-    axios.delete(`${import.meta.env.VITE_SERVER_URL}/athletes/${athleteId}`)
-    .then(() => {
-      //Actualizar la lista después de eliminar
-      axios.get(`${import.meta.env.VITE_SERVER_URL}/athletes`)
-      .then((response) => {
-        setAthletes(response.data);
-        setFilteredAthletes(response.data);
-      });
-    })
-      .catch((error) => {
-        //console.log(error);
-      });
-  };
-
   if (!athletes) {
     return <h3>Searching...</h3>;
   }
@@ -85,7 +69,7 @@ function Athletes() {
         </div>
       ) : (
         filteredAthletes.map((eachAthlete) => {
-          return <AthleteCard key={eachAthlete.id} athlete={eachAthlete} onDelete={handleDeleteAthlete}/>;
+          return <AthleteCard key={eachAthlete.id} athlete={eachAthlete}/>;
         })
       )}
 
