@@ -2,28 +2,28 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function AddAthlete() {
+function AddBrand() {
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
-  const [year, setYear] = useState("");
+  const [yearCreated, setYearCreated] = useState("");
   const [image, setImage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newAthlete = {
+    const newBrand = {
       name,
       location,
-      year,
-      image: image || "./assets/defaultbrand.png",
+      yearCreated,
+      image: image || "./images/brands/defaultbrand.png",
     };
 
-    axios.get(`${import.meta.env.VITE_SERVER_URL}/brands`, newBrand)
+    axios.post(`${import.meta.env.VITE_SERVER_URL}/brands`, newBrand)
     .then(() => {
         //console.log("athlete added")
-        navigate("/athletes");
+        navigate("/brands");
     })
     .catch((error) => {
         //console.log(error)
@@ -61,8 +61,8 @@ function AddAthlete() {
           <input
           type="text"
             name="year"
-            value={year}
-            onChange={(e) => setYear(e.target.value)}
+            value={yearCreated}
+            onChange={(e) => setYearCreated(e.target.value)}
             />
         </div>
 
@@ -73,7 +73,7 @@ function AddAthlete() {
             name="image"
             value={image}
             onChange={(e) => setImage(e.target.value)}
-            placeholder="/images/brands/brand-name.png"
+            placeholder="/images/brands/brand.png"
           />
         </div>
 
@@ -86,4 +86,4 @@ function AddAthlete() {
   );
 }
 
-export default AddAthlete;
+export default AddBrand;

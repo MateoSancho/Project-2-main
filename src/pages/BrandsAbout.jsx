@@ -39,5 +39,3 @@ function BrandsAbout() {
 }
 
 export default BrandsAbout;
-
-// Cancel, Edit, Brand Link, Css

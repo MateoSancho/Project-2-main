@@ -1,25 +1,129 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function AthletesAbout() {
+  const [athlete, setAthlete] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [brandId, setBrandId] = useState("");
+  const [image, setImage] = useState("");
 
-  const [ athlete, setAthlete] = useState(null);
-  const { id } = useParams(); // Get the athlete ID from the URL
+  const params = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_SERVER_URL}/athletes/${id}`)
-      .then((response) => {
-        //console.log(response.data)
-        setAthlete(response.data);
-      })
-      .catch((error) => {
-        //console.error(error)
-      });
-  }, [id]);
+    axios.get(`${import.meta.env.VITE_SERVER_URL}/athletes/${params.id}`)
+    .then((response) => {
+      //console.log(response.data)
+      setAthlete(response.data);
+      setName(response.data.name);
+      setCategory(response.data.category);
+      setBrandId(response.data.brandId);
+      setImage(response.data.image);
+    })
+    .catch((error) => {
+      //console.error(error)
+    });
+  }, [params.id]);
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    const updatedAthlete = {
+      name,
+      category,
+      brandId,
+      image,
+    };
+
+    try {
+      await axios.put(`${import.meta.env.VITE_SERVER_URL}/athletes/${params.id}`,updatedAthlete);
+      setAthlete(updatedAthlete);
+      setIsEditing(false);
+    } catch (error) {
+      //console.log(error)
+    }
+  };
+
+  const deleteAthlete = () => {
+    axios.delete(`${import.meta.env.VITE_SERVER_URL}/athletes/${params.id}`)
+    .then(() => {
+      // Redirect to athletes list after successful delete
+      navigate("/athletes")
+    })
+    .catch((error) => {
+      //console.log(error)
+    });
+  };
 
   if (!athlete) {
     return <h3>Loading athlete details...</h3>;
+  }
+
+  if (isEditing) {
+    return (
+      <div className="athleteabout">
+        <h1>Edit Athlete</h1>
+        
+        <form onSubmit={handleFormSubmit} className="edit-form">
+          <div className="formGroup">
+            <label>Name:</label>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="formGroup">
+            <label>Category:</label>
+            <input
+              type="text"
+              name="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="formGroup">
+            <label>Brand ID:</label>
+            <select
+              name="brandId"
+              value={brandId}
+              onChange={(e) => setBrandId(e.target.value)}
+              required
+            >
+              <option value="AA">Ferral Supplements</option>
+              <option value="AB">Gymshark</option>
+              <option value="AC">Breath Divnity</option>
+            </select>
+          </div>
+
+          <div className="formGroup">
+            <label>Image URL:</label>
+            <input
+              type="text"
+              name="image"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+              placeholder="/images/athletes/athlete.png"
+            />
+          </div>
+
+          <div className="form-buttons">
+            <button type="submit" className="view-details-btn">Save Changes</button>
+            <button type="button" onClick={() => setIsEditing(false)} className="view-details-btn">Cancel</button>
+          </div>
+        </form>
+
+        <Link to="/athletes" className="Link">← Back to Athletes</Link>
+      </div>
+    );
   }
 
   return (
@@ -29,13 +133,16 @@ function AthletesAbout() {
       <div className="athleteinfo">
         <p><strong>Category:</strong> {athlete.category}</p>
         <p><strong>Brand ID:</strong> {athlete.brandId}</p>
+        <div className="action-buttons">
+          <button onClick={() => setIsEditing(true)} className="edit-btn">Edit Athlete</button>
+          <button onClick={deleteAthlete} className="delete-btn">Delete Athlete</button>
+        </div>
       </div>
-
-    <Link to="/athletes" className="Link">← Back to Athletes</Link>
+      <Link to="/athletes" className="Link">← Back to Athletes</Link>
     </div>
   );
 }
 
 export default AthletesAbout;
 
-// Cancel, Edit, Back, Brand Link, Css
+//Brand Link

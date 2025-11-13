@@ -20,7 +20,7 @@ function AddAthlete() {
       image: image || "./assets/defaultathlete.png",
     };
 
-    axios.get(`${import.meta.env.VITE_SERVER_URL}/athletes`, newAthlete)
+    axios.post(`${import.meta.env.VITE_SERVER_URL}/athletes`, newAthlete)
     .then(() => {
         //console.log("athlete added")
         navigate("/athletes");
@@ -77,7 +77,7 @@ function AddAthlete() {
             name="image"
             value={image}
             onChange={(e) => setImage(e.target.value)}
-            placeholder="/images/athletes/athlete-name.png"
+            placeholder="./images/athletes/athlete.png"
           />
         </div>
 
