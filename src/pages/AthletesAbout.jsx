@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function AthletesAbout() {
+
   const [athlete, setAthlete] = useState(null);
   const [brand, setBrand] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -74,6 +75,11 @@ function AthletesAbout() {
     return <h3>Loading athlete details...</h3>;
   }
 
+  // Fix image URL for display(Ai help also)
+  const athleteImageUrl = athlete.image.startsWith('http') 
+    ? athlete.image 
+    : `${import.meta.env.VITE_SERVER_URL}${athlete.image}`;
+
   if (isEditing) {
     return (
       <div className="athleteabout">
@@ -144,7 +150,7 @@ function AthletesAbout() {
 
   return (
     <div className="athleteabout">
-      <img src={`${import.meta.env.VITE_SERVER_URL}${athlete.image}`} alt={athlete.name} className="athlete-detail-image"/>
+      <img src={athleteImageUrl} alt={athlete.name} className="athlete-detail-image" onError={(e) => {e.target.src = `${import.meta.env.VITE_SERVER_URL}/images/athletes/Undefined.png`}}/>
       <h1>{athlete.name}</h1>
       <div className="athleteinfo">
         <p><strong>Category:</strong> {athlete.category}</p>

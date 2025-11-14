@@ -6,8 +6,8 @@ import aboutImage from "../assets/about-img.jpg";
 function Dashboard() {
   return (
     <div className="dashboard">
-      <h1>MAIN PAGE</h1>
-      <p>The worlds best page ever :)</p>
+      <h1>TrenPedia</h1>
+      <p>Where the gym and the knowledge combines, the worlds best page ever :)</p>
 
       <div className="sections-container">
         {/* Athletes Section */}

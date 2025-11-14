@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 
 function AthleteCard (props) {
 
-  const handleDelete = () => {
-    props.onDelete(props.athlete.id);
-  }
+  const imageUrl = props.athlete.image.startsWith('http') 
+    ? props.athlete.image 
+    : `${import.meta.env.VITE_SERVER_URL}${props.athlete.image}`;
   
   return (
     <div className="Athlete-card">
       <div className="card-image-container">
-        <img src={`${import.meta.env.VITE_SERVER_URL}${props.athlete.image}`} alt={props.athlete.name} className="athlete-image"/>
+        <img src={imageUrl} alt={props.athlete.name} className="athlete-image" onError={(e) => {e.target.src = "/images/athletes/Undefined.png";}} onLoad={() => console.log("Image loaded successfully:", imageUrl)} />
       </div>
       <div className="card-text-content">
         <h3>{props.athlete.name}</h3>

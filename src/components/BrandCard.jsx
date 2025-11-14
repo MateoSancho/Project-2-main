@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 
 function BrandCard (props) {
+
+  const imageUrl = props.brand.image.startsWith('http') 
+    ? props.brand.image 
+    : `${import.meta.env.VITE_SERVER_URL}${props.brand.image}`;
+
   return (
     <div className="Brand-card">
       <div className="card-image-container">
-        <img src={`${import.meta.env.VITE_SERVER_URL}${props.brand.image}`} alt={props.brand.name} className="brand-image"/>
+        <img src={imageUrl} alt={props.brand.name} className="brand-image" onError={(e) => {e.target.src = "/images/brands/Undefined.png"}} onLoad={() => console.log("Brand image loaded successfully:", imageUrl)}/>
       </div>
       <div className="card-text-content">
         <h3>{props.brand.name}</h3>
