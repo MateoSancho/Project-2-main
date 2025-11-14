@@ -43,3 +43,10 @@ function App() {
 }
 
 export default App
+
+
+//Add to athletes a Description, social media links
+//Add to brands a Description, web links
+//Add more Data for Brands and Athletes
+//Better Css
+//Add a 404 not found page
