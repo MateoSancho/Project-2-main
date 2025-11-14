@@ -15,6 +15,12 @@ function BrandCard (props) {
         <h3>{props.brand.name}</h3>
         <p><strong>Location:</strong> {props.brand.location}</p>
         <p><strong>Year:</strong> {props.brand.yearCreated}</p>
+        <p><strong>Description:</strong> {props.brand.description}</p>
+
+        {props.brand.web && (
+          <p className="website-link"><strong>Website:</strong><a href={props.brand.web} target="_blank" rel="noopener noreferrer" className="external-link">Visit Site</a></p>
+        )}
+
         <Link to={`/brands/${props.brand.id}`}>
           <button className="view-details-btn">View Details</button>
         </Link>

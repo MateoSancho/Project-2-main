@@ -14,11 +14,18 @@ function AthleteCard (props) {
       <div className="card-text-content">
         <h3>{props.athlete.name}</h3>
         <p><strong>Category:</strong> {props.athlete.category}</p>
+        <p><strong>Description:</strong> {props.athlete.description}</p>
+
+        {props.athlete.yt && (
+          <p className="youtube-link"><strong>YouTube:</strong><a href={props.athlete.yt} target="_blank" rel="noopener noreferrer" className="external-link">Enter Channel</a></p>
+        )}
+
         <div className="card-buttons">
           <Link to={`/athletes/${props.athlete.id}`}>
             <button className="view-details-btn">View Details</button>
           </Link>
         </div>
+
       </div>
     </div>
   );

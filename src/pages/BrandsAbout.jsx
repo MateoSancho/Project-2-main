@@ -10,6 +10,9 @@ function BrandsAbout() {
   const [location, setLocation] = useState("");
   const [yearCreated, setYearCreated] = useState("");
   const [image, setImage] = useState("");
+  const [description, setDescription] = useState("");
+  const [website, setWebsite] = useState("");
+  
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -23,6 +26,8 @@ function BrandsAbout() {
       setLocation(response.data.location);
       setYearCreated(response.data.yearCreated);
       setImage(response.data.image);
+      setDescription(response.data.description || ""); 
+      setWebsite(response.data.web || "");
     })
     .catch((error) => {
       //console.error(error)
@@ -37,6 +42,8 @@ function BrandsAbout() {
       location,
       yearCreated: Number(yearCreated),
       image,
+      description,
+      web: website,
     };
 
     try {
@@ -97,6 +104,27 @@ function BrandsAbout() {
           </div>
 
           <div className="formGroup">
+            <label>Description:</label>
+            <textarea
+              name="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows="3"
+            />
+          </div>
+
+          <div className="formGroup">
+            <label>Website URL:</label>
+            <input
+              type="url"
+              name="website"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              placeholder="https://example.com"
+            />
+          </div>
+
+          <div className="formGroup">
             <label>Image URL:</label>
             <input
               type="text"
@@ -147,7 +175,12 @@ function BrandsAbout() {
         <p><strong>Name:</strong> {brand.name}</p>
         <p><strong>Location:</strong> {brand.location}</p>
         <p><strong>Year of creation:</strong> {brand.yearCreated}</p>
+        <p><strong>Description:</strong> {brand.description}</p>
         <p><strong>Brand ID:</strong> {brand.id}</p>
+
+        {brand.web && (
+        <p><strong>Official Website:</strong><a href={brand.web} target="_blank" rel="noopener noreferrer" className="external-link">Visit Website</a></p>
+        )}
       </div>
 
       <Link to="/brands" className="Link">← Back to Brands</Link>

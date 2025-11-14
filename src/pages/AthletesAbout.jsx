@@ -11,6 +11,8 @@ function AthletesAbout() {
   const [category, setCategory] = useState("");
   const [brandId, setBrandId] = useState("");
   const [image, setImage] = useState("");
+  const [description, setDescription] = useState("");
+  const [youtube, setYoutube] = useState("");
 
   const params = useParams();
   const navigate = useNavigate();
@@ -24,6 +26,8 @@ function AthletesAbout() {
       setCategory(response.data.category);
       setBrandId(response.data.brandId);
       setImage(response.data.image);
+      setDescription(response.data.description || ""); 
+      setYoutube(response.data.yt || "");
 
       // Cargar datos de la marca usando el brandId del atleta
       if (response.data.brandId) {
@@ -49,6 +53,8 @@ function AthletesAbout() {
       category,
       brandId,
       image,
+      description,
+      yt: youtube,
     };
 
     try {
@@ -98,6 +104,16 @@ function AthletesAbout() {
           </div>
 
           <div className="formGroup">
+            <label>Description:</label>
+            <textarea
+              name="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows="3"
+            />
+          </div>
+
+          <div className="formGroup">
             <label>Category:</label>
             <input
               type="text"
@@ -124,6 +140,17 @@ function AthletesAbout() {
               <option value="AF">PR Lifestyle</option>
               <option value="AG">Unknown</option>
             </select>
+          </div>
+
+          <div className="formGroup">
+            <label>YouTube URL:</label>
+            <input
+              type="url"
+              name="youtube"
+              value={youtube}
+              onChange={(e) => setYoutube(e.target.value)}
+              placeholder="https://youtube.com/@channel"
+            />
           </div>
 
           <div className="formGroup">
@@ -154,12 +181,18 @@ function AthletesAbout() {
       <h1>{athlete.name}</h1>
       <div className="athleteinfo">
         <p><strong>Category:</strong> {athlete.category}</p>
+         <p><strong>Description:</strong> {athlete.description}</p>
         <p><strong>Brand:</strong>{" "} 
           {brand ? (
             <Link to={`/brands/${brand.id}`} className="brand-link">{brand.name}</Link>
           ) : ( 
             <span>Loading brand...</span> //Mensaje para mostrar mientras carga 
         )} </p>
+
+        {athlete.yt && (
+        <p><strong>YouTube Channel:</strong><a href={athlete.yt} target="_blank" rel="noopener noreferrer" className="external-link">Watch Content</a></p>
+        )}
+
         <div className="action-buttons">
           <button onClick={() => setIsEditing(true)} className="edit-btn">Edit Athlete</button>
           <button onClick={deleteAthlete} className="delete-btn">Delete Athlete</button>
